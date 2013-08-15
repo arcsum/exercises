@@ -1,18 +1,16 @@
 class Phrase
-  include Enumerable
+  attr_accessor :text
   
-  attr_reader :txt
-  
-  def initialize(input)
-    @txt = input.downcase
+  def initialize(text)
+    self.text = text
   end
   
-  def each(&block)
-    txt.scan(/[[:word:]]+/).each { |word| yield(word) }
+  def words
+    text.downcase.scan(/\w+/)
   end
   
   def word_count
-    @word_count ||= each_with_object(Hash.new(0)) do |word, counts|
+    words.each_with_object(Hash.new(0)) do |word, counts|
       counts[word] += 1
     end
   end

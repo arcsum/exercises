@@ -13,8 +13,8 @@ end
 class Anagram
   include WordPredicates
   
-  def initialize(word)
-    @word = word.downcase
+  def initialize(subject)
+    @subject = subject
   end
   
   def match(candidates)
@@ -23,9 +23,8 @@ class Anagram
   
   private
   
-  attr_reader :word
-  
   def is_anagram?(candidate)
-    different_words?(word, candidate) && same_letters?(word, candidate)
+    subject, candidate = @subject.downcase, candidate.downcase
+    different_words?(subject, candidate) && same_letters?(subject, candidate)
   end
 end
